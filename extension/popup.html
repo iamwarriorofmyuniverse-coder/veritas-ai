@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VeritasAI Fact-Checker</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 380px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0B132B;
+      color: #F8FAFC;
+      padding: 16px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 14px;
+    }
+    .header h2 { font-size: 16px; color: #38BDF8; }
+    .tagline { font-size: 11px; color: #94A3B8; }
+    textarea {
+      width: 100%;
+      height: 75px;
+      background: #1C2541;
+      border: 1px solid #3A506B;
+      border-radius: 8px;
+      color: #FFF;
+      padding: 10px;
+      font-size: 12px;
+      resize: none;
+      outline: none;
+      margin-bottom: 10px;
+    }
+    textarea:focus { border-color: #38BDF8; }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #0EA5E9, #2563EB);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.9; }
+    .card {
+      margin-top: 14px;
+      background: #1C2541;
+      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: none;
+    }
+    .score-dial {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .score-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: #38BDF8;
+    }
+    .verdict {
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .verdict.true { color: #10B981; }
+    .verdict.fake { color: #EF4444; }
+    .meta { font-size: 11px; color: #94A3B8; margin-top: 6px; }
+    .sources-title { font-size: 12px; font-weight: 600; margin-top: 12px; color: #E2E8F0; }
+    .source-item {
+      font-size: 11px;
+      margin-top: 6px;
+      padding: 6px 8px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      border-left: 2px solid #0EA5E9;
+    }
+    .source-item a { color: #38BDF8; text-decoration: none; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span style="font-size: 20px;">🔍</span>
+    <div>
+      <h2>VeritasAI Engine</h2>
+      <div class="tagline">NLP Grounding & Live Wire RSS Fact-Checking</div>
+    </div>
+  </div>
+
+  <textarea id="claimInput" placeholder="Paste claim, social post, or headline to fact-check..."></textarea>
+  <button id="verifyBtn">⚡ Verify Claim</button>
+
+  <div id="resultCard" class="card">
+    <div class="score-dial">
+      <div>
+        <div style="font-size: 11px; color: #94A3B8;">Credibility Score</div>
+        <div id="scoreVal" class="score-num">--%</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 11px; color: #94A3B8;">Verdict</div>
+        <div id="verdictVal" class="verdict">--</div>
+      </div>
+    </div>
+
+    <div class="meta" id="metaInfo">Confidence: -- | Sentiment: --</div>
+
+    <div class="sources-title">📰 Live Google News Grounding:</div>
+    <div id="sourcesList"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
